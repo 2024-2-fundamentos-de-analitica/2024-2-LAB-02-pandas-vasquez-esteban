@@ -5,6 +5,23 @@ datos requeridos se encuentran en los archivos `tbl0.tsv`, `tbl1.tsv` y
 librerias de pandas para resolver las preguntas.
 """
 
+import pandas as pd  # type: ignore
+
+
+def load_data(file):
+    """Load tsv table"""
+    return pd.read_csv(file, sep="\t")
+
+
+def unique_c4(df):
+    """Agrupar por registros únicos de c4"""
+    return df["c4"].unique()
+
+
+def sort_mayus(input_list):
+    """Convert to mayus & sort"""
+    return sorted([l.upper() for l in input_list])
+
 
 def pregunta_06():
     """
@@ -15,3 +32,5 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
+    df = load_data("files/input/tbl1.tsv")
+    return sort_mayus(unique_c4(df))

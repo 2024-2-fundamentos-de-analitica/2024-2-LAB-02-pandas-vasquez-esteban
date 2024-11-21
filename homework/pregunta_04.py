@@ -5,6 +5,18 @@ datos requeridos se encuentran en los archivos `tbl0.tsv`, `tbl1.tsv` y
 librerias de pandas para resolver las preguntas.
 """
 
+import pandas as pd  # type: ignore
+
+
+def load_data(file):
+    """Load tsv table"""
+    return pd.read_csv(file, sep="\t")
+
+
+def mean_c2(df):
+    """Agrupar por #Registros de cada letra"""
+    return df.groupby("c1")["c2"].mean()
+
 
 def pregunta_04():
     """
@@ -20,3 +32,5 @@ def pregunta_04():
     E    4.785714
     Name: c2, dtype: float64
     """
+    df = load_data("files/input/tbl0.tsv")
+    return mean_c2(df)

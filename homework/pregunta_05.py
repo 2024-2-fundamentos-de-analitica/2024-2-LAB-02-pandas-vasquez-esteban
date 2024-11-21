@@ -5,6 +5,18 @@ datos requeridos se encuentran en los archivos `tbl0.tsv`, `tbl1.tsv` y
 librerias de pandas para resolver las preguntas.
 """
 
+import pandas as pd  # type: ignore
+
+
+def load_data(file):
+    """Load tsv table"""
+    return pd.read_csv(file, sep="\t")
+
+
+def max_c2_groupbyc1(df):
+    """Agrupar por #Registros de cada letra"""
+    return df.groupby("c1")["c2"].max()
+
 
 def pregunta_05():
     """
@@ -20,3 +32,5 @@ def pregunta_05():
     E    9
     Name: c2, dtype: int64
     """
+    df = load_data("files/input/tbl0.tsv")
+    return max_c2_groupbyc1(df)

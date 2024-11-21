@@ -5,6 +5,18 @@ datos requeridos se encuentran en los archivos `tbl0.tsv`, `tbl1.tsv` y
 librerias de pandas para resolver las preguntas.
 """
 
+import pandas as pd  # type: ignore
+
+
+def load_data(file):
+    """Load tsv table"""
+    return pd.read_csv(file, sep="\t")
+
+
+def sum_c0c2(df):
+    """Agrupar por #Registros de cada letra"""
+    return df["c0"] + df["c2"]
+
 
 def pregunta_08():
     """
@@ -22,3 +34,9 @@ def pregunta_08():
     39   39   E    5  1998-01-26    44
 
     """
+    df = load_data("files/input/tbl0.tsv")
+    res = sum_c0c2(df)
+
+    df["suma"] = res
+
+    return df

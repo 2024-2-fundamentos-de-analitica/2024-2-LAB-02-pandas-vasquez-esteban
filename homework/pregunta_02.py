@@ -5,6 +5,19 @@ datos requeridos se encuentran en los archivos `tbl0.tsv`, `tbl1.tsv` y
 librerias de pandas para resolver las preguntas.
 """
 
+import pandas as pd  # type: ignore
+
+
+def load_data(file):
+    """Load tsv table"""
+
+    return pd.read_csv(file, sep="\t")
+
+
+def col_len(df):
+    """Retorna la cantidad de columnas"""
+    return df.shape[1]
+
 
 def pregunta_02():
     """
@@ -14,3 +27,5 @@ def pregunta_02():
     4
 
     """
+    df = load_data("files/input/tbl0.tsv")
+    return col_len(df)

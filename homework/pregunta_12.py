@@ -5,6 +5,22 @@ datos requeridos se encuentran en los archivos `tbl0.tsv`, `tbl1.tsv` y
 librerias de pandas para resolver las preguntas.
 """
 
+import pandas as pd  # type: ignore
+
+
+def load_data(file):
+    """Load tsv table"""
+    return pd.read_csv(file, sep="\t")
+
+
+def joinc5(df):
+    """Agrupar por #Registros de cada letra"""
+    df["c5"] = df["c5a"] + ":" + df["c5b"].astype(str)
+    del df["c5a"]
+    del df["c5b"]
+
+    return df.groupby("c0")["c5"].apply(lambda x: ",".join(sorted(x)))
+
 
 def pregunta_12():
     """
@@ -22,3 +38,8 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
+
+    df = load_data("files/input/tbl2.tsv")
+    res = joinc5(df).reset_index()
+
+    return res
